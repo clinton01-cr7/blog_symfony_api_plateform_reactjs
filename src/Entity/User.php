@@ -8,11 +8,13 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use App\Entity\Traits\Timestampable;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name="`user`")
  * @ORM\HasLifecycleCallbacks
+ * @ApiResource()
  */
 class User implements UserInterface
 {
@@ -44,6 +46,7 @@ class User implements UserInterface
     public function __construct()
     {
         $this->articles = new ArrayCollection();
+        $this->createdAt = new \DateTimeImmutable();
     }
 
     public function getEmail(): ?string
